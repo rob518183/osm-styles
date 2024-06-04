@@ -1,6 +1,6 @@
 # OSM Bright styles
 ## Introduction
-This is a GeoServer data directory with OSM layer and styles mimicking a OSM-bright style.
+This is a GeoServer data directory with an OSM layer and styles mimicking a OSM-bright style.
 
 ![Sample output map](map.png)
 
@@ -75,11 +75,11 @@ With this in mind:
     ``$IMPOSM_DIR/imposm import -mapping mapping.yml -read $OSM_PBF_DUMP
 `` 
 
-4. Run the "write" part of the import process (replace the ``$user``, ``$password``, ``$host`` and ``$database`` with actual values for your database). The ``optimize`` parameter includes a long process of table clustering for optimal serve performance, it's not mandatory and can take a lot of time. 
+4. Run the "write" part of the import process (replace the ``$user``, ``$password``, ``$host`` and ``$database`` with actual values for your database).
 
     ``$IMPOSM_DIR/imposm import -mapping mapping.yml -write -connection postgis://$user:$password@$host/$database -overwritecache``
     
-   It's possible to add a ``-optimize`` extra option at the end of the above command to have optimal record layout in the database. However, caution is recommended, that step can take much more time than importing the data itself.
+   It's possible to add an extra ``-optimize`` option at the end of the above command to have optimal record layout in the database. However, caution is recommended, that step can take much more time than importing the data itself.
    
 5. Congratulations, you have succesfully imported the data in PostGIS
 
@@ -95,7 +95,7 @@ This allows continued usage of the database while the import is running:
 
 ### Setting up the Fonts
 
-OSM data can have labels in many languages. The styles use the following fonts to support rendering in the many scripts labels need:
+OSM data can have labels in many languages. The styles use the following fonts to support rendering in the many scripts the labels need:
 
 * [Google Noto](https://www.google.com/get/noto/) 
 * [DejaVu](http://dejavu-fonts.org/)
@@ -120,14 +120,14 @@ Failing to install the fonts won't prevent the map from showing up, but will res
 
 ### Parameterizing GeoServer and starting it up
 
-The data directory contains paramers in place of database connection values for user, password, host and database. This is to make it easy to move it around, in different environment, without changing its contents.
+The data directory contains parameters in place of database connection values for user, password, host and database. This is to make it easy to move it around, in different environment, without changing its contents.
 
 You have two options:
 
 1. Start GeoServer without any parametrization, find the ``osm`` store, and manually change user, password, host and database
 2. Setup the necessary system variables to start up GeoServer in parametric mode.
 
-If you decide to follow the second, make sure to pass the following to the command line starting up the Java virtual machine (e.g., ``startup.sh`` if running the GeoServer binary package, Tomcat own ``catalina.sh`` or ``JAVA_OPTS`` variable, and os on). Replace the variables to match your setup:
+If you decide to follow the second option, make sure to pass the following to the command line starting up the Java virtual machine (e.g., ``startup.sh`` if running the GeoServer binary package, Tomcat own ``catalina.sh`` or ``JAVA_OPTS`` variable, and so on). Replace the variables to match your setup:
 
 ``POSTGRES_ENDPOINT=127.0.0.1;POSTGRES_PORT=5432;POSTGRES_PASSWORD=$password;POSTGRES_USER=$user;OSM_DB=$database;OSM_SCHEMA=$schema`` 
 
